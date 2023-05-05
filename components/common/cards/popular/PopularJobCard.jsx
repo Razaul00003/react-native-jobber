@@ -4,7 +4,6 @@ import styles from "./popularjobcard.style";
 import { checkImageURL } from "../../../../utils";
 
 const PopularJobCard = ({ item, selectedJob, handleCardPress }) => {
-  console.log(item, "from popjobcard");
   return (
     <TouchableOpacity
       style={styles.container(selectedJob, item)}
@@ -30,9 +29,6 @@ const PopularJobCard = ({ item, selectedJob, handleCardPress }) => {
           {item.job_title}
         </Text>
         <View style={styles.infoWrapper}>
-          <Text style={styles.publisher(selectedJob, item)}>
-            {item?.job_publisher}
-          </Text>
           <Text style={styles.location}> {item.job_country}</Text>
         </View>
       </View>
