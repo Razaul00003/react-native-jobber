@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Text,
   View,
@@ -19,9 +20,12 @@ import {
 import { COLORS, icons, SIZES } from "../../constants";
 import useFetch from "../../hook/useFetch";
 
+const tabs = ["About", "Quallifications", "Responsibilities"];
+
 const JobDetails = () => {
   const params = useSearchParams();
   const router = useRouter();
+  const [activeTab, setActiveTab] = useState(tabs[0]);
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = () => {};
 
@@ -73,7 +77,11 @@ const JobDetails = () => {
               companyName={data[0].employer_name}
               location={data[0].job_country}
             />
-            <JobTabs />
+            <JobTabs
+              tabs={tabs}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
           </View>
         )}
       </ScrollView>
