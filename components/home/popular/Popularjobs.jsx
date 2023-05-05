@@ -14,16 +14,21 @@ import PopularJobCard from "../../common/cards/popular/PopularJobCard";
 import useFetch from "../../../hook/useFetch";
 
 const Popularjobs = () => {
-  const { data, isLoading, error } = useFetch("search", {
+  const router = useRouter();
+  const { data, isLoading, error, refetch } = useFetch("search", {
     query: "React developer",
     num_pages: "1",
   });
+  console.log(data.length);
 
-  const router = useRouter();
+  const handleCardPress = (item) => {
+    router.push(`/job-details/${item.job_id}`);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Popular jobs</Text>
+        <Text style={styles.headerTitle}>Popular jobs {data.length} </Text>
         <TouchableOpacity>
           <Text style={styles.headerBtn}>Show all</Text>
         </TouchableOpacity>
@@ -35,16 +40,19 @@ const Popularjobs = () => {
         ) : error ? (
           <Text>Something went wrong</Text>
         ) : (
-          <FlatList
-            data={data}
-            renderItem={({ item }) => <PopularJobCard item={item} />}
-            keyExtractor={(item) => item.job_id}
-            contentContainerStyle={{ columnGap: SIZES.medium }}
-            horizontal
-          />
+          <>
+            <FlatList
+              data={data}
+              renderItem={({ item }) => <Text>1</Text>}
+              keyExtractor={(item) => item.job_id}
+              contentContainerStyle={{ columnGap: SIZES.medium }}
+              horizontal
+            />
+          </>
         )}
       </View>
     </View>
   );
 };
+
 export default Popularjobs;
